@@ -1,0 +1,19 @@
+type lotteryData {
+  id: String
+  name: String
+  image_url: String
+  price: Int
+  max_bonus: Int
+  start_sell: Date
+  stop_sell: Date
+  last_redeem: Date
+  max_issue: Int
+  max_top: Int
+  sales_rate: String
+  unredeemed: Int
+}
+
+type Query {
+  lotteryDatas: [lotteryData]
+  lotteryData(id: String!): lotteryData
+}

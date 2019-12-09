@@ -1,0 +1,7 @@
+{
+  "localhost": {
+    "API_URI": "http://localhost:3000",
+    "HOSTNAME": "http://localhost:4000",
+    "PORT": 4001
+  }
+}
