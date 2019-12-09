@@ -56,6 +56,16 @@ export class LotteryData extends Entity {
   })
   max_top?: number;
 
+  @property({
+    type: 'string',
+  })
+  sales_rate?: string;
+
+  @property({
+    type: 'number',
+  })
+  unredeemed?: number;
+
   constructor(data?: Partial<LotteryData>) {
     super(data);
   }

@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {LotteryItem} from './lottery-item.model';
 
 @model()
 export class Trustee extends Entity {
@@ -63,6 +64,9 @@ export class Trustee extends Entity {
     type: 'string',
   })
   consignee_2?: string;
+
+  @hasMany(() => LotteryItem)
+  lotteryItems: LotteryItem[];
 
   constructor(data?: Partial<Trustee>) {
     super(data);

@@ -1,4 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Trustee} from './trustee.model';
+import {LotteryData} from './lottery-data.model';
 
 @model()
 export class LotteryItem extends Entity {
@@ -22,6 +24,21 @@ export class LotteryItem extends Entity {
   })
   revoked: boolean;
 
+  @property({
+    type: 'date',
+  })
+  createdAt: string;
+
+  @property({
+    type: 'date',
+  })
+  exportedAt: string;
+
+  @belongsTo(() => Trustee)
+  trusteeId: number;
+
+  @belongsTo(() => LotteryData)
+  lotteryDataId: string;
 
   constructor(data?: Partial<LotteryItem>) {
     super(data);
