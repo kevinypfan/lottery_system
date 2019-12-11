@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './providers/device.dart';
+import './providers/lottery_data.dart';
+
+import './screens/lottery_data_screen.dart';
+
 import './widgets/loading_view.dart';
+import './layouts/default_layout.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<Device>(create: (_) => Device()),
+        ChangeNotifierProvider<LotteryData>(create: (_) => LotteryData()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -32,26 +38,7 @@ class MyHomePage extends StatelessWidget {
       if (device.loading) {
         return LoadingView();
       } else if (device.isAllow) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You deviceName: ${device.info}',
-            ),
-            Text(
-              'You deviceVersion: ${device.version}',
-            ),
-            Text(
-              'You identifier: ${device.identifier}',
-            ),
-            Text(
-              'You isAllow: ${device.isAllow}',
-            ),
-            Text(
-              'You loading: ${device.loading}',
-            ),
-          ],
-        );
+        return LotteryDataScreen();
       } else {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -62,11 +49,8 @@ class MyHomePage extends StatelessWidget {
       }
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Lottery'),
-      ),
-      body: Center(
+    return DefaultLayout(
+      Center(
         child: _renderWidget(),
       ),
     );
