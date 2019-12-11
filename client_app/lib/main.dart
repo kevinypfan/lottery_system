@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './providers/device.dart';
+import './widgets/loading_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,46 +11,28 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<Device>(create: (_) => Device()),
+        ChangeNotifierProvider<Device>(create: (_) => Device()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MyHomePage(title: 'Flutter Demo Home Page'),
+        home: MyHomePage(),
       ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final device = Provider.of<Device>(context, listen: false);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
+    final device = Provider.of<Device>(context);
+    Widget _renderWidget() {
+      if (device.loading) {
+        return LoadingView();
+      } else if (device.isAllow) {
+        return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
@@ -62,19 +45,29 @@ class _MyHomePageState extends State<MyHomePage> {
               'You identifier: ${device.identifier}',
             ),
             Text(
-              'You have pushed the button this many times:',
+              'You isAllow: ${device.isAllow}',
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              'You loading: ${device.loading}',
             ),
           ],
-        ),
+        );
+      } else {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('請先要求管理員給予權限。'),
+          ],
+        );
+      }
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Lottery'),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      body: Center(
+        child: _renderWidget(),
       ),
     );
   }
