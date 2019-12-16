@@ -1,7 +1,9 @@
 import 'package:graphql/client.dart';
 
+import '../config/config.dart';
+
 final HttpLink _httpLink = HttpLink(
-  uri: 'http://localhost:4001/graphql',
+  uri: Config.API_URI,
 );
 
 // final AuthLink _authLink = AuthLink(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/barcode_scan.dart';
+import '../widgets/barcode_scanner.dart';
 
 class DefaultLayout extends StatelessWidget {
   final Widget child;

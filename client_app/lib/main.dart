@@ -5,6 +5,7 @@ import './providers/device.dart';
 import './providers/lottery_data.dart';
 
 import './screens/lottery_data_screen.dart';
+import './screens/scanned_barcode_screen.dart';
 
 import './widgets/loading_view.dart';
 import './layouts/default_layout.dart';
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: MyHomePage(),
+        routes: {
+          ScannedBarcodeScreen.routeName: (ctx) => ScannedBarcodeScreen(),
+        },
       ),
     );
   }

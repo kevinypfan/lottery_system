@@ -21,11 +21,16 @@ class _ScannedBarcodeScreenState extends State<ScannedBarcodeScreen> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            expandedHeight: 300,
-            floating: false,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(),
-          )
+            // actions: <Widget>[],
+            title: Text('Sliver App Bar'),
+          ),
+          SliverList(
+              delegate: SliverChildBuilderDelegate((context, int) {
+            return Text(args.firstCode);
+          }, childCount: 65)),
+          SliverFillRemaining(
+            child: Text(args.numberCode),
+          ),
         ],
       ),
       bottomNavigationBar: Padding(

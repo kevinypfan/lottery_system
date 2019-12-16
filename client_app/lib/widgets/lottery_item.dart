@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../widgets/loading_view.dart';
 import '../providers/lottery_data.dart' as lottery;
 
 class LotteryItem extends StatelessWidget {
@@ -9,17 +10,28 @@ class LotteryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            title: Text('${_lotteryItem.name} \$${_lotteryItem.price}'),
-            subtitle: Text(
-              DateFormat('dd/MM/yyyy hh:mm').format(_lotteryItem.startSell),
+      child: _lotteryItem.name == '^'
+          ? Container(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: LoadingView(),
+            )
+          : ListTile(
+              title: Text(
+                  '${_lotteryItem.name} (${_lotteryItem.id}) \$${_lotteryItem.price}'),
+              trailing: ClipRRect(
+                borderRadius: new BorderRadius.circular(8.0),
+                child: Image.network(
+                  'https://www.taiwanlottery.com.tw' + _lotteryItem.imageUrl,
+                  // height: 150.0,
+                  // width: 100.0,
+                ),
+              ),
+              subtitle: Text('發行日期: ' +
+                  DateFormat('yyyy/MM/dd').format(_lotteryItem.startSell) +
+                  '\n' +
+                  '兌獎截止: ' +
+                  DateFormat('yyyy/MM/dd').format(_lotteryItem.lastRedeem)),
             ),
-          ),
-        ],
-      ),
     );
   }
 }

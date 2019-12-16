@@ -6,6 +6,8 @@ query LotteryDatas($limit: Int, $order: String, $skip: Int, $offset: Int) {
     price
     image_url
     start_sell
+    last_redeem
+    stop_sell
   }
 }
 ''';
