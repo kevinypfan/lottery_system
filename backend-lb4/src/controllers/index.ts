@@ -6,3 +6,8 @@ export * from './lottery-item-trustee.controller';
 export * from './lottery-item-lottery-data.controller';
 export * from './trustee-lottery-item.controller';
 export * from './store.controller';
+export * from './lottery-item-store.controller';
+export * from './store-lottery-item.controller';
+export * from './device.controller';
+export * from './device-store.controller';
+export * from './store-device.controller';
