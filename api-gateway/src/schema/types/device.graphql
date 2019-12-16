@@ -1,0 +1,25 @@
+type Device {
+  id: String
+  name: String
+  isVerify: Boolean
+  model: String
+  version: String
+  storeId: String
+}
+
+type Query {
+  getDevice(id: String!): Device
+}
+
+type Mutation {
+  newDevice(input: DeviceInput): Device
+}
+
+input DeviceInput {
+  id: String!
+  name: String
+  isVerify: Boolean
+  model: String
+  version: String
+  storeId: String
+}
