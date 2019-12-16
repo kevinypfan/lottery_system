@@ -1,2 +1,3 @@
-python_process
+**/*.ipynb
+**/*.csv
 **/.DS_Store
