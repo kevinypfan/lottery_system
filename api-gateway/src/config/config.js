@@ -23,7 +23,7 @@ if (env === "localhost") {
   parserConfig(config);
 }
 
-if (env === "product") {
+if (env === "production") {
   const config = require("./config.prod.json");
   parserConfig(config);
 }

@@ -1,0 +1,7 @@
+{
+  "production": {
+    "API_URI": "http://localhost:3001",
+    "HOSTNAME": "http://localhost:4001",
+    "PORT": 4001
+  }
+}
