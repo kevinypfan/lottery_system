@@ -116,7 +116,7 @@ class LotteryData with ChangeNotifier {
     final QueryOptions getLotteryDatasOption = QueryOptions(
       document: getLotteryDatasQuery,
       variables: <String, dynamic>{
-        'order': 'start_sell DESC',
+        'order': 'id DESC',
         'limit': itemRequestThreshold,
         'skip': page * itemRequestThreshold
       },

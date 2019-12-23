@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MyHomePage(),
+        home: ScannedBarcodeScreen(),
         routes: {
           ScannedBarcodeScreen.routeName: (ctx) => ScannedBarcodeScreen(),
         },
