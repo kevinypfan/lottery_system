@@ -11,3 +11,22 @@ query LotteryDatas($limit: Int, $order: String, $skip: Int, $offset: Int) {
   }
 }
 ''';
+
+const getLotteryItemByIdQuery = r'''
+query ($id: String!){
+  lotteryData(id: $id) {
+    id
+    name
+    image_url
+    price
+    max_bonus
+    start_sell
+    stop_sell
+    last_redeem
+    max_issue
+    max_top
+    sales_rate
+    unredeemed
+  }
+}
+''';

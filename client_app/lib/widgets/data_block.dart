@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class DataBlock extends StatelessWidget {
+  final String title;
+  final String content;
+
+  DataBlock({this.title, this.content});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,34 +20,27 @@ class DataBlock extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'Title',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
+          AutoSizeText(
+            title,
+            maxLines: 1,
+            presetFontSizes: [18, 16],
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
           Divider(
             thickness: 3,
           ),
           Expanded(
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  'Content',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+                AutoSizeText(
+                  content,
+                  presetFontSizes: [18, 16, 14, 12],
+                  maxLines: 3,
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

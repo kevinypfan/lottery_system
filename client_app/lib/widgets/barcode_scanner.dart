@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../screens/scanned_barcode_screen.dart';
+import '../screens/error_screen.dart';
 
 class BarcodeScan extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class BarcodeScan extends StatefulWidget {
 }
 
 class _BarcodeScanState extends State<BarcodeScan> {
-  String barcode = "";
+  // String barcode = "";
 
   @override
   initState() {
@@ -33,7 +34,7 @@ class _BarcodeScanState extends State<BarcodeScan> {
   Future scan() async {
     try {
       String barcode = await BarcodeScanner.scan();
-      setState(() => this.barcode = barcode);
+      // setState(() => this.barcode = barcode);
       String firstCode = barcode.substring(0, 4);
       String numberCode = barcode.substring(5, 11);
 
@@ -43,17 +44,33 @@ class _BarcodeScanState extends State<BarcodeScan> {
       );
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
-        setState(() {
-          this.barcode = 'The user did not grant the camera permission!';
-        });
+        Navigator.of(context).pushNamed(
+          ErrorScreen.routeName,
+          arguments: ErrorArguments(
+              code: 'BarcodeScanner.CameraAccessDenied',
+              message: 'The user did not grant the camera permission!'),
+        );
       } else {
-        setState(() => this.barcode = 'Unknown error: $e');
+        Navigator.of(context).pushNamed(
+          ErrorScreen.routeName,
+          arguments:
+              ErrorArguments(code: 'Unknown', message: 'Unknown error: $e'),
+        );
       }
     } on FormatException {
-      setState(() => this.barcode =
-          'null (User returned using the "back"-button before scanning anything. Result)');
+      Navigator.of(context).pushNamed(
+        ErrorScreen.routeName,
+        arguments: ErrorArguments(
+            code: 'Unknown',
+            message:
+                'null (User returned using the "back"-button before scanning anything. Result)'),
+      );
     } catch (e) {
-      setState(() => this.barcode = 'Unknown error: $e');
+      Navigator.of(context).pushNamed(
+        ErrorScreen.routeName,
+        arguments:
+            ErrorArguments(code: 'Unknown', message: 'Unknown error: $e'),
+      );
     }
   }
 }

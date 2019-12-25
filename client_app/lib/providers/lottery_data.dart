@@ -18,6 +18,21 @@ class LotteryItem {
   String salesRate;
   int unredeemed;
 
+  LotteryItem({
+    this.id,
+    this.name,
+    this.imageUrl,
+    this.lastRedeem,
+    this.maxBonus,
+    this.maxIssue,
+    this.maxTop,
+    this.price,
+    this.salesRate,
+    this.startSell,
+    this.stopSell,
+    this.unredeemed,
+  });
+
   LotteryItem.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         name = json['name'],
@@ -50,21 +65,6 @@ class LotteryItem {
         'salesRate': salesRate,
         'unredeemed': unredeemed,
       };
-
-  LotteryItem({
-    this.id,
-    this.name,
-    this.imageUrl,
-    this.lastRedeem,
-    this.maxBonus,
-    this.maxIssue,
-    this.maxTop,
-    this.price,
-    this.salesRate,
-    this.startSell,
-    this.stopSell,
-    this.unredeemed,
-  });
 }
 
 class LotteryData with ChangeNotifier {
@@ -79,6 +79,24 @@ class LotteryData with ChangeNotifier {
     fetchLotteryDatas(0).then((_) {
       print('fetch done');
     });
+  }
+
+  Future<LotteryItem> findLotteryItemById(String id) async {
+    final QueryOptions getLotteryItemByIdOption = QueryOptions(
+      document: getLotteryItemByIdQuery,
+      variables: <String, dynamic>{
+        'id': id,
+      },
+    );
+
+    final QueryResult getLotteryItemById =
+        await graphQLClient.query(getLotteryItemByIdOption);
+
+    if (getLotteryItemById.hasErrors) {
+      print(getLotteryItemById.errors);
+    }
+
+    return LotteryItem.fromJson(getLotteryItemById.data['lotteryData']);
   }
 
   Future<void> handleItemCreated(int index) async {
