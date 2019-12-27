@@ -23,6 +23,10 @@ type LotteryItem {
   lotteryDataId: String
   storeId: String
   serial: String
+  importRate: Int
+  exportRate: Int
+  deviceId: ID
+  exporter: ID
 }
 
 type Query {
@@ -32,15 +36,20 @@ type Query {
 
 type Mutation {
   newLotteryItem(input: LotteryItemInput): LotteryItem
-  exportLotteryItem(id: ID!): LotteryItem
+  exportLotteryItem(id: ID!, input: exportLotteryItemInput): LotteryItem
 }
 
-input LotteryItemInput {
-  number: String
-  # createdAt: Date
-  # exportedAt: Date
-  trusteeId: Int
-  lotteryDataId: String
-  storeId: String
-  serial: String
+input newLotteryItemInput {
+  number: String!
+  importRate: Int!
+  trusteeId: Int!
+  lotteryDataId: String!
+  storeId: String!
+  serial: String!
+  deviceId: ID!
+}
+
+input exportLotteryItemInput {
+  exportRate: Int!
+  exporter: ID!
 }

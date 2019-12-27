@@ -28,7 +28,8 @@ export default {
       try {
         console.log({ ...args.input });
         const { data } = await ctx.axios.post(`/lottery-items`, {
-          ...args.input
+          ...args.input,
+          createdAt: new Date().toISOString()
         });
 
         return data;
