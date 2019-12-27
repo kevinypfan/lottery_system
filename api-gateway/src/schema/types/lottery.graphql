@@ -35,11 +35,11 @@ type Query {
 }
 
 type Mutation {
-  newLotteryItem(input: LotteryItemInput): LotteryItem
-  exportLotteryItem(id: ID!, input: exportLotteryItemInput): LotteryItem
+  newLotteryItem(input: NewLotteryItemInput): LotteryItem
+  exportLotteryItem(id: ID!, input: ExportLotteryItemInput): LotteryItem
 }
 
-input newLotteryItemInput {
+input NewLotteryItemInput {
   number: String!
   importRate: Int!
   trusteeId: Int!
@@ -49,7 +49,7 @@ input newLotteryItemInput {
   deviceId: ID!
 }
 
-input exportLotteryItemInput {
+input ExportLotteryItemInput {
   exportRate: Int!
   exporter: ID!
 }
