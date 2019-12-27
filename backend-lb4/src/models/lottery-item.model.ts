@@ -35,6 +35,12 @@ export class LotteryItem extends Entity {
   })
   exportedAt: string;
 
+  @property({
+    type: 'string',
+    required: true,
+  })
+  serial: string;
+
   @belongsTo(() => Trustee)
   trusteeId: number;
 
