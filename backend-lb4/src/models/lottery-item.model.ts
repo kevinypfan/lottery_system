@@ -64,6 +64,9 @@ export class LotteryItem extends Entity {
   @belongsTo(() => Device)
   deviceId: string;
 
+  @belongsTo(() => Device)
+  exporter: string;
+
   constructor(data?: Partial<LotteryItem>) {
     super(data);
   }
