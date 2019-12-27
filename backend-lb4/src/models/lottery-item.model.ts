@@ -2,6 +2,7 @@ import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Trustee} from './trustee.model';
 import {LotteryData} from './lottery-data.model';
 import {Store} from './store.model';
+import {Device} from './device.model';
 
 @model()
 export class LotteryItem extends Entity {
@@ -20,7 +21,6 @@ export class LotteryItem extends Entity {
 
   @property({
     type: 'boolean',
-    required: true,
     default: false,
   })
   revoked: boolean;
@@ -36,11 +36,19 @@ export class LotteryItem extends Entity {
   exportedAt: string;
 
   @property({
+    type: 'number',
+  })
+  importRate: number;
+
+  @property({
+    type: 'number',
+  })
+  exportRate: number;
+
+  @property({
     type: 'string',
     required: true,
-    index: {
-      unique: true,
-    },
+    index: {kind: 'UNIQUE'},
   })
   serial: string;
 
@@ -52,6 +60,9 @@ export class LotteryItem extends Entity {
 
   @belongsTo(() => Store)
   storeId: string;
+
+  @belongsTo(() => Device)
+  deviceId: string;
 
   constructor(data?: Partial<LotteryItem>) {
     super(data);

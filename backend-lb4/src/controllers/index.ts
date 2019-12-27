@@ -11,3 +11,5 @@ export * from './store-lottery-item.controller';
 export * from './device.controller';
 export * from './device-store.controller';
 export * from './store-device.controller';
+export * from './lottery-item-device.controller';
+export * from './device-lottery-item.controller';

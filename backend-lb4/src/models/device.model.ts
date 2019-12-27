@@ -1,5 +1,6 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
 import {Store} from './store.model';
+import {LotteryItem} from './lottery-item.model';
 
 @model()
 export class Device extends Entity {
@@ -34,6 +35,9 @@ export class Device extends Entity {
 
   @belongsTo(() => Store)
   storeId: string;
+
+  @hasMany(() => LotteryItem)
+  lotteryItems: LotteryItem[];
 
   constructor(data?: Partial<Device>) {
     super(data);
