@@ -38,6 +38,9 @@ export class LotteryItem extends Entity {
   @property({
     type: 'string',
     required: true,
+    index: {
+      unique: true,
+    },
   })
   serial: string;
 
