@@ -8,13 +8,8 @@ import '../config/config.dart';
 import '../widgets/data_block.dart';
 import '../providers/lottery_data.dart';
 import '../widgets/loading_view.dart';
-
-class ScreenArguments {
-  final String firstCode;
-  final String numberCode;
-
-  ScreenArguments(this.firstCode, this.numberCode);
-}
+import '../models/barcode_argument.dart';
+import './into_stock_screen.dart';
 
 class ScannedBarcodeScreen extends StatefulWidget {
   static const routeName = 'scanned-barcode-screen';
@@ -73,7 +68,7 @@ class _ScannedBarcodeScreenState extends State<ScannedBarcodeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ScreenArguments args = ModalRoute.of(context).settings.arguments;
+    final BarcodeArgument args = ModalRoute.of(context).settings.arguments;
     if (lotteryItem.id != args.firstCode) {
       Provider.of<LotteryData>(context, listen: false)
           .findLotteryItemById(args.firstCode)
@@ -127,9 +122,14 @@ class _ScannedBarcodeScreenState extends State<ScannedBarcodeScreen> {
               ],
             ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(8.0),
         child: RaisedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed(
+              IntoStockScreen.routeName,
+              arguments: args,
+            );
+          },
           color: Colors.blue,
           textColor: Colors.white,
           child: Text(

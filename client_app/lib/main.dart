@@ -7,6 +7,7 @@ import './providers/lottery_data.dart';
 import './screens/lottery_data_screen.dart';
 import './screens/scanned_barcode_screen.dart';
 import './screens/error_screen.dart';
+import './screens/into_stock_screen.dart';
 
 import './widgets/loading_view.dart';
 import './layouts/default_layout.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         routes: {
           ScannedBarcodeScreen.routeName: (ctx) => ScannedBarcodeScreen(),
           ErrorScreen.routeName: (ctx) => ErrorScreen(),
+          IntoStockScreen.routeName: (ctx) => IntoStockScreen(),
         },
       ),
     );

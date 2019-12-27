@@ -17,11 +17,14 @@ class ErrorScreen extends StatelessWidget {
         title: Text('Error'),
         backgroundColor: Colors.redAccent,
       ),
-      body: Column(
-        children: <Widget>[
-          Text('code: ${args.code}'),
-          Text('code: ${args.message}'),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('code: ${args.code}'),
+            Text('message: ${args.message}'),
+          ],
+        ),
       ),
     );
   }

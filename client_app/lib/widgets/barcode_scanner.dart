@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 
 import '../screens/scanned_barcode_screen.dart';
 import '../screens/error_screen.dart';
+import '../models/barcode_argument.dart';
 
 class BarcodeScan extends StatefulWidget {
   @override
@@ -35,13 +36,23 @@ class _BarcodeScanState extends State<BarcodeScan> {
     try {
       String barcode = await BarcodeScanner.scan();
       // setState(() => this.barcode = barcode);
-      String firstCode = barcode.substring(0, 4);
-      String numberCode = barcode.substring(5, 11);
-
-      Navigator.of(context).pushNamed(
-        ScannedBarcodeScreen.routeName,
-        arguments: ScreenArguments(firstCode, numberCode),
-      );
+      print(barcode);
+      print(barcode.length);
+      if (barcode.length >= 16 && barcode.length <= 29) {
+        String firstCode = barcode.substring(0, 4);
+        String numberCode = barcode.substring(5, 11);
+        String serial = barcode.substring(0, 11);
+        Navigator.of(context).pushNamed(
+          ScannedBarcodeScreen.routeName,
+          arguments: BarcodeArgument(firstCode, numberCode, serial),
+        );
+      } else {
+        Navigator.of(context).pushNamed(
+          ErrorScreen.routeName,
+          arguments: ErrorArguments(
+              code: 'barcode.length Error', message: 'barcode.length Error'),
+        );
+      }
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
         Navigator.of(context).pushNamed(
