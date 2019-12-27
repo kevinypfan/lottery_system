@@ -1,4 +1,4 @@
-type lotteryData {
+type LotteryData {
   id: String
   name: String
   image_url: String
@@ -13,7 +13,33 @@ type lotteryData {
   unredeemed: Int
 }
 
+type LotteryItem {
+  id: Int
+  number: String
+  revoked: Boolean
+  createdAt: Date
+  exportedAt: Date
+  trusteeId: Int
+  lotteryDataId: String
+  storeId: String
+  serial: String
+}
+
 type Query {
-  lotteryDatas(limit: Int, skip: Int, offset: Int, order: String): [lotteryData]
-  lotteryData(id: String!): lotteryData
+  lotteryDatas(limit: Int, skip: Int, offset: Int, order: String): [LotteryData]
+  lotteryData(id: String!): LotteryData
+}
+
+type Mutation {
+  newLotteryItem(input: LotteryItemInput): LotteryItem
+}
+
+input LotteryItemInput {
+  number: String
+  createdAt: Date
+  exportedAt: Date
+  trusteeId: Int
+  lotteryDataId: String
+  storeId: String
+  serial: String
 }

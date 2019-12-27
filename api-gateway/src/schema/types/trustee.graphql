@@ -1,0 +1,17 @@
+type Trustee {
+  id: Int
+  name: String
+  card_code: String
+  bank: String
+  store: String
+  identity: String
+  birthday: Date
+  hex: String
+  phone: String
+  consignee_1: String
+  consignee_2: String
+}
+
+type Query {
+  trustees(limit: Int, skip: Int, offset: Int, order: String): [Trustee]
+}
