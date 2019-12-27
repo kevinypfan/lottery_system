@@ -32,12 +32,13 @@ type Query {
 
 type Mutation {
   newLotteryItem(input: LotteryItemInput): LotteryItem
+  exportLotteryItem(id: ID!): LotteryItem
 }
 
 input LotteryItemInput {
   number: String
-  createdAt: Date
-  exportedAt: Date
+  # createdAt: Date
+  # exportedAt: Date
   trusteeId: Int
   lotteryDataId: String
   storeId: String
