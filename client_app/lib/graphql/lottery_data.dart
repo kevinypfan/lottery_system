@@ -12,7 +12,7 @@ query LotteryDatas($limit: Int, $order: String, $skip: Int, $offset: Int) {
 }
 ''';
 
-const getLotteryItemByIdQuery = r'''
+const String getLotteryItemByIdQuery = r'''
 query ($id: String!){
   lotteryData(id: $id) {
     id
@@ -27,6 +27,26 @@ query ($id: String!){
     max_top
     sales_rate
     unredeemed
+  }
+}
+''';
+
+const String newLotteryItemMutation = r'''
+mutation($input: NewLotteryItemInput) {
+  newLotteryItem(input: $input) {
+    id
+    number
+    revoked
+    createdAt
+    exportedAt
+    trusteeId
+    lotteryDataId
+    storeId
+    serial
+    importRate
+    exportRate
+    deviceId
+    exporter
   }
 }
 ''';

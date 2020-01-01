@@ -11,14 +11,12 @@ class Device with ChangeNotifier {
   String info;
   String version;
   String identifier;
+  String name;
+  String storeId;
   bool isAllow = false;
   bool loading = true;
 
-  Device() {
-    getDeviceDetails();
-  }
-
-  void getDeviceDetails() async {
+  Future<void> getDeviceDetails() async {
     final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
     try {
       if (Platform.isAndroid) {
@@ -32,22 +30,24 @@ class Device with ChangeNotifier {
         version = data.systemVersion;
         identifier = data.identifierForVendor; //UUID for iOS
       }
-      checkDeviseAllow();
+      // checkDeviseAllow();
     } on PlatformException {
       print('Failed to get platform version');
     }
 //if (!mounted) return;
   }
 
-  void checkDeviseAllow() async {
+  Future<bool> checkDeviseAllow() async {
+    print('checkDeviseAllow');
     try {
+      await getDeviceDetails();
       final QueryOptions getDeviceOption = QueryOptions(
         document: getDeviceQuery,
         variables: <String, dynamic>{
           'id': identifier,
         },
       );
-
+      print('id: $identifier');
       final QueryResult device = await graphQLClient.query(getDeviceOption);
 
       if (device.hasErrors) {
@@ -65,21 +65,31 @@ class Device with ChangeNotifier {
 
           final QueryResult newDevice =
               await graphQLClient.mutate(newDeviceOption);
+
           if (newDevice.hasErrors) {
-            print(device.errors);
+            // print(newDevice.errors);
           }
-          isAllow = device.data['getDevice']['isVerify'];
+          print('newDevice: ${newDevice.data}');
+          isAllow = newDevice.data['newDevice']['isVerify'];
+          name = newDevice.data['newDevice']['name'];
+          storeId = newDevice.data['newDevice']['storeId'];
           loading = false;
-          notifyListeners();
+          // notifyListeners();
+          return isAllow;
         }
       }
+      print('device: ${device.data}');
       isAllow = device.data['getDevice']['isVerify'];
+      name = device.data['getDevice']['name'];
+      storeId = device.data['getDevice']['storeId'];
       loading = false;
       notifyListeners();
+      return isAllow;
     } catch (e) {
-      print(e);
+      // print(e);
       loading = false;
-      notifyListeners();
+      return false;
+      // notifyListeners();
     }
   }
 }
