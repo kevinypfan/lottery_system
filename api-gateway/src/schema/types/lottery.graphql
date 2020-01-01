@@ -32,6 +32,7 @@ type LotteryItem {
 type Query {
   lotteryDatas(limit: Int, skip: Int, offset: Int, order: String): [LotteryData]
   lotteryData(id: String!): LotteryData
+  lotteryItemCountByLotteryDateId: String
 }
 
 type Mutation {

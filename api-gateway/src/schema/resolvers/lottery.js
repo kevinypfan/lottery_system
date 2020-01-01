@@ -1,7 +1,21 @@
 // import { URLSearchParams } from "url";
+import _ from "lodash";
 
 export default {
   Query: {
+    lotteryItemCountByLotteryDateId: async (root, args, ctx) => {
+      try {
+        const { data } = await ctx.axios.get(
+          "/lottery-items?filter=" +
+            JSON.stringify({ where: { revoked: false } })
+        );
+
+        return JSON.stringify(_.countBy(data, "lotteryDataId"));
+      } catch (error) {
+        console.log(error);
+        return new Error(error);
+      }
+    },
     lotteryDatas: async (root, args, ctx) => {
       try {
         const { data } = await ctx.axios.get(
