@@ -10,6 +10,10 @@ import '../screens/error_screen.dart';
 import '../models/barcode_argument.dart';
 
 class BarcodeScan extends StatefulWidget {
+  final String state;
+
+  BarcodeScan(this.state);
+
   @override
   _BarcodeScanState createState() => new _BarcodeScanState();
 }
@@ -42,9 +46,15 @@ class _BarcodeScanState extends State<BarcodeScan> {
         String firstCode = barcode.substring(0, 4);
         String numberCode = barcode.substring(5, 11);
         String serial = barcode.substring(0, 11);
+        String cardNumber = barcode.substring(12, 15);
         Navigator.of(context).pushNamed(
           ScannedBarcodeScreen.routeName,
-          arguments: BarcodeArgument(firstCode, numberCode, serial),
+          arguments: BarcodeArgument(
+            firstCode: firstCode,
+            numberCode: numberCode,
+            serial: serial,
+            cardNumber: cardNumber,
+          ),
         );
       } else {
         Navigator.of(context).pushNamed(

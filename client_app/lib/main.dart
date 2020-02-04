@@ -3,11 +3,13 @@ import 'package:provider/provider.dart';
 
 import './providers/device.dart';
 import './providers/lottery_data.dart';
+import './providers/trustee.dart';
 
 // import './screens/lottery_data_screen.dart';
 import './screens/scanned_barcode_screen.dart';
 import './screens/error_screen.dart';
-import './screens/into_stock_screen.dart';
+// import './screens/into_stock_screen.dart';
+import './screens/trustee_detail_screen.dart';
 
 import './widgets/loading_view.dart';
 import './layouts/default_layout.dart';
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<Device>(create: (_) => device),
         ChangeNotifierProvider<LotteryData>(create: (_) => LotteryData()),
+        ChangeNotifierProvider<TrusteeData>(create: (_) => TrusteeData()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -41,7 +44,8 @@ class MyApp extends StatelessWidget {
         routes: {
           ScannedBarcodeScreen.routeName: (ctx) => ScannedBarcodeScreen(),
           ErrorScreen.routeName: (ctx) => ErrorScreen(),
-          IntoStockScreen.routeName: (ctx) => IntoStockScreen(),
+          // IntoStockScreen.routeName: (ctx) => IntoStockScreen(),
+          TrusteeDetailScreen.routeName: (ctx) => TrusteeDetailScreen(),
         },
       ),
     );

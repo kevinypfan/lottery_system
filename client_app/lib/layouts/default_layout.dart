@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:community_material_icon/community_material_icon.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets/barcode_scanner.dart';
-import '../providers/device.dart';
-import '../widgets/loading_view.dart';
 
 import '../screens/lottery_data_screen.dart';
-import '../screens/error_screen.dart';
+import '../screens/trustee_profile_screen.dart';
 import '../models/bottom_navigation_item.dart';
-import '../screens/not_forbidden_screen.dart';
 
 class DefaultLayout extends StatefulWidget {
   @override
@@ -26,16 +21,16 @@ class _DefaultLayoutState extends State<DefaultLayout> {
     ),
     BottomNavigationItem(
       title: '庫存',
-      icon: Icons.account_box,
+      icon: Icons.inbox,
       child: Center(
         child: Text("庫存頁面尚未開發完成"),
       ),
     ),
     BottomNavigationItem(
-      title: '銷售總計',
-      icon: Icons.access_alarm,
+      title: '經銷人',
+      icon: Icons.account_box,
       child: Center(
-        child: Text("銷售總計頁面尚未開發完成"),
+        child: TrusteeProfileScreen(),
       ),
     )
   ];
@@ -59,7 +54,7 @@ class _DefaultLayoutState extends State<DefaultLayout> {
       appBar: AppBar(
         title: Text('Lottery'),
         actions: <Widget>[
-          BarcodeScan(),
+          BarcodeScan('default'),
         ],
       ),
       body: _bottomNavigations[_selectedIndex].child,

@@ -9,7 +9,7 @@ import '../widgets/data_block.dart';
 import '../providers/lottery_data.dart';
 import '../widgets/loading_view.dart';
 import '../models/barcode_argument.dart';
-import './into_stock_screen.dart';
+// import './into_stock_screen.dart';
 
 class ScannedBarcodeScreen extends StatefulWidget {
   static const routeName = 'scanned-barcode-screen';
@@ -125,10 +125,10 @@ class _ScannedBarcodeScreenState extends State<ScannedBarcodeScreen> {
         padding: EdgeInsets.all(8.0),
         child: RaisedButton(
           onPressed: () {
-            Navigator.of(context).pushNamed(
-              IntoStockScreen.routeName,
-              arguments: args,
-            );
+            // Navigator.of(context).pushNamed(
+            //   IntoStockScreen.routeName,
+            //   arguments: args,
+            // );
           },
           color: Colors.blue,
           textColor: Colors.white,
