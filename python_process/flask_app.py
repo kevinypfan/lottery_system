@@ -11,4 +11,5 @@ def scratch_data():
     return {"data": spider_scratch()}
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8300, debug=True, threaded=True)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8300)
