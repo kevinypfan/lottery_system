@@ -3,10 +3,11 @@ from bs4 import BeautifulSoup
 import datetime
 import random
 
-html = requests.get('https://www.taiwanlottery.com.tw/info/instant/sale.aspx')
-bs = BeautifulSoup(html.text, 'html.parser')
+
 
 def spider_scratch():
+    html = requests.get('https://www.taiwanlottery.com.tw/info/instant/sale.aspx')
+    bs = BeautifulSoup(html.text, 'html.parser')
     trs = bs.find_all('tr')
     rows = list()
     for tr in trs:
